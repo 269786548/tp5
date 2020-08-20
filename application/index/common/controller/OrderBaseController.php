@@ -12,6 +12,8 @@ class OrderBaseController extends Controller
 	{
 		$postJson = $request->param();
 		Log::info('test');
+
+
 	}
 
 
