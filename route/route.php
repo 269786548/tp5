@@ -29,3 +29,5 @@ Route::group('v1', function(){
 	Route::rule('order','index/Order/index');
 })->middleware('Check');
 
+Route::get('authorize', 'OAuth/authorize');
+Route::post('authorize', 'OAuth/authorize');
