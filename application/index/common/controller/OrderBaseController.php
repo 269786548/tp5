@@ -11,7 +11,10 @@ class OrderBaseController extends Controller
 	public function __construct(Request $request)
 	{
 		$postJson = file_get_contents('php://input');//得到参数
+		$header = $request::header();
+
 		Log::info($postJson);
+		Log::info(json_encode($header));
 		$this->postJson = json_decode($postJson,true);
 
 	}
