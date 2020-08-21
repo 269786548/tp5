@@ -32,7 +32,7 @@ class OrderBaseController extends Controller
 				'message'  => $e->getMessage(),
 			);
 		}
-//		return json($result);
+		return json($result);
 
 	}
 }
