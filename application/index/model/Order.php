@@ -21,6 +21,7 @@ class Order extends Model
             ->where($map)
             ->where('pay_trade_no|order_no','=',$data['pay_trade_no'])
             ->find();
+        Log::info($this->getLastSql());
         if (empty($res)) {
             $this->return_data['message'] = 'no this outTradeNo';
             $this->return_data['status'] = '4';
