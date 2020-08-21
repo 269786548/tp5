@@ -18,13 +18,13 @@ class OrderBaseController extends Controller
 
 
 	public function getService($serviceMethod){
-		if(empty($this->postJson)){
-			$return_data['code'] = 400;
-			$return_data['message'] = 'need parameters!!!';
-			return json($return_data);
-		}
 		try
 		{
+			if(empty($this->postJson)){
+				$return_data['code'] = 400;
+				$return_data['message'] = 'need parameters!!!';
+				return json($return_data);
+			}
 			$orderService = new OrderService($this->postJson);
 			$result = $orderService->$serviceMethod(); //实例化
 		}catch (\Think\Exception $e) {
