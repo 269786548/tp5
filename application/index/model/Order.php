@@ -15,7 +15,7 @@ class Order extends Model
 //        $where['order_no']  = '123';
 //        $where['_logic'] = 'or';
 //        $map['_complex'] = $where;
-        $map['para_id']  = $data['para_id'];
+        $map['para_id']  = $data['userId'];
         $res = $this
             ->field("return_code")
             ->where($map)
