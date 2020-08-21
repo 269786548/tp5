@@ -17,7 +17,7 @@ class BaseService {
 
 	function checkIp(){
 		$ip = getIp();
-		if (!in_array($ip,array('115.128.222.200','127.0.0.1','221.217.92.126'))) {
+		if (!in_array($ip,array('115.28.222.200','127.0.0.1','221.217.92.126'))) {
 			throw new \think\Exception('error','403');
 		}
 	}
