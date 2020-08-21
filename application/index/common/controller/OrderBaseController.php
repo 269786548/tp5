@@ -10,18 +10,21 @@ class OrderBaseController extends Controller
 	public $postJson;
 	public function __construct(Request $request)
 	{
-		$postJson = $request->param();
-		Log::info('test');
-
-
+		$postJson = file_get_contents('php://input');//得到参数
+		$this->postJson = $postJson;
+		Log::info($postJson);
 	}
 
 
 	public function getService($serviceMethod){
-
+		if(empty($this->postJson)){
+			$return_data['code'] = 400;
+			$return_data['message'] = 'need parameters!!!';
+			return json($return_data);
+		}
 		try
 		{
-			$orderService = new OrderService();
+			$orderService = new OrderService($this->postJson);
 			$result = $orderService->$serviceMethod(); //实例化
 		}catch (\Think\Exception $e) {
 			$result = array(
@@ -29,7 +32,7 @@ class OrderBaseController extends Controller
 				'message'  => $e->getMessage(),
 			);
 		}
-		return json($result);
+//		return json($result);
 
 	}
 }

@@ -2,24 +2,24 @@
 namespace app\index\model;
 
 use think\Model;
+use think\facade\Log;
 
 class Order extends Model
 {
     // 直接使用配置参数名
     protected $table = 'orders';
     public $return_data;
-    public function getOrderStatus()
+    public function getOrderStatus($data)
     {
 //        $map['pay_trade_no']  = '202004081635401407914';
 //        $where['order_no']  = '123';
 //        $where['_logic'] = 'or';
 //        $map['_complex'] = $where;
-        $map['para_id']  = 10000;
-
+        $map['para_id']  = $data['para_id'];
         $res = $this
             ->field("return_code")
             ->where($map)
-            ->where('pay_trade_no|order_no','=','202004081635401407914')
+            ->where('pay_trade_no|order_no','=',$data['pay_trade_no'])
             ->find();
         if (empty($res)) {
             $this->return_data['message'] = 'no this outTradeNo';
@@ -27,7 +27,7 @@ class Order extends Model
         }else{
             $this->return_data['status'] = $res['return_code'];
         }
-        $this->return_data['outTradeNo'] = '202004081635401407914';
+        $this->return_data['outTradeNo'] = $data['pay_trade_no'];
         return $this->return_data;
     }
 }

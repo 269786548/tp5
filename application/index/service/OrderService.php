@@ -7,10 +7,12 @@ use app\index\service\BaseService;
 class OrderService extends BaseService{
 	public $baseService ;
 	public $order ;
-	public function __construct()
+	public $data;
+	public function __construct($data)
 	{
 		$this->baseService = new BaseService();
 		$this->order = new Order();
+		$this->data = $data;
 	}
 
 	public function getOrderQuery(){
@@ -23,7 +25,7 @@ class OrderService extends BaseService{
 
 	public function getOrderStatus()
 	{
-		$res = $this->order->getOrderStatus();
+		$res = $this->order->getOrderStatus($this->data);
 		return $res;
 	}
 }
